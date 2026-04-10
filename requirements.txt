@@ -1,0 +1,10 @@
+anthropic
+torch
+miditok
+pretty_midi
+mido
+faiss-cpu
+sentence-transformers
+python-dotenv
+pytest
+numpy
