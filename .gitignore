@@ -1,27 +1,27 @@
-# --- Python Environment ---
+# --- Security & Secrets ---
+.env
+*.env
+keys.json
+
+# --- Python & Environments ---
 .venv/
+venv/
+env/
 __pycache__/
 *.py[cod]
 
-# --- Mac System Files ---
+# --- Machine Learning & Data ---
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+*.index
+*.db
+
+# --- macOS Specific ---
 .DS_Store
 
-# --- API Keys and Secrets ---
-.env
-
-# --- Data (MAESTRO Dataset) ---
-# We ignore the raw MIDI and CSVs so your Git stays light
-data/raw/
-data/processed/
-*.mid
-*.midi
-*.zip
-*.csv
-
-# --- Large ML Models ---
-# Don't upload the actual trained model weights (they are huge)
-models/
-*.pt
-*.pth
-*.bin
-
+# --- IDEs ---
+.vscode/
+.idea/
+.ipynb_checkpoints/
