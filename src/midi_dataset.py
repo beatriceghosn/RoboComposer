@@ -22,14 +22,14 @@ class MIDIDataset(Dataset):
             raise FileNotFoundError(f"Raw directory not found: {self.raw_dir}")
 
         #  Collect all MIDI files across year folders
-        # self.files = sorted(
-        #     list(self.raw_dir.glob("*/*.mid")) +
-        #     list(self.raw_dir.glob("*/*.midi"))
-        # )
         self.files = sorted(
-            list((self.raw_dir / "2004").glob("*.mid")) +
-            list((self.raw_dir / "2004").glob("*.midi"))
+            list(self.raw_dir.glob("*/*.mid")) +
+            list(self.raw_dir.glob("*/*.midi"))
         )
+        # self.files = sorted(
+        #     list((self.raw_dir / "2004").glob("*.mid")) +
+        #     list((self.raw_dir / "2004").glob("*.midi"))
+        # )
 
         if len(self.files) == 0:
             print(f"No MIDI files found in {self.raw_dir}")
