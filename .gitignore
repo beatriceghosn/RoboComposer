@@ -25,3 +25,4 @@ data/processed/*
 .vscode/
 .idea/
 .ipynb_checkpoints/
+data/maestro-v3.0.0/
