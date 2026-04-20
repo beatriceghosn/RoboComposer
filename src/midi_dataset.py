@@ -6,13 +6,20 @@ import pretty_midi
 from src.tokenizer import MIDITokenizer
 import numpy as np
 
+
 class MIDIDataset(Dataset):
     """
     Loads and tokenizes MIDI files from the MAESTRO dataset.
     Converts raw MIDI into token sequences suitable for transformer input.
     """
 
-    def __init__(self, raw_dir="data/maestro-v3.0.0", processed_dir = "data/processed", split = "train", max_seq_len = 1024):
+    def __init__(
+        self,
+        raw_dir="data/maestro-v3.0.0",
+        processed_dir="data/processed",
+        split="train",
+        max_seq_len=1024,
+    ):
         self.split = split
         self.max_seq_len = max_seq_len
 
@@ -22,15 +29,11 @@ class MIDIDataset(Dataset):
         if not self.raw_dir.exists():
             raise FileNotFoundError(f"Raw directory not found: {self.raw_dir}")
 
-        #  Collect all MIDI files across year folders
+        # Collect all MIDI files across year folders
         self.files = sorted(
             list(self.raw_dir.glob("*/*.mid")) +
             list(self.raw_dir.glob("*/*.midi"))
         )
-        # self.files = sorted(
-        #     list((self.raw_dir / "2004").glob("*.mid")) +
-        #     list((self.raw_dir / "2004").glob("*.midi"))
-        # )
 
         if len(self.files) == 0:
             print(f"No MIDI files found in {self.raw_dir}")
@@ -42,9 +45,7 @@ class MIDIDataset(Dataset):
 
     def __getitem__(self, idx: int):
         """Returns a tokenized tensor for one MIDI file."""
-        item = self.files[idx]
-        midi_path = item
-
+        midi_path = self.files[idx]
         tokens = self.tokenize(str(midi_path))
 
         if len(tokens) > self.max_seq_len:
@@ -52,7 +53,7 @@ class MIDIDataset(Dataset):
         else:
             tokens += [0] * (self.max_seq_len - len(tokens))
 
-        return torch.tensor(tokens)
+        return torch.tensor(tokens, dtype=torch.long)
 
     def tokenize(self, midi_path: str) -> list[int]:
         """Converts a MIDI file to a list of integer tokens."""
@@ -60,13 +61,25 @@ class MIDIDataset(Dataset):
 
     def extract_metadata(self, midi_path: str) -> dict:
         """
-        Extract tempo, key, mode, and average velocity from a MIDI file.
+        Extracts tempo, key, mode, and average velocity from a MIDI file.
+        Returns:
+            {
+                "tempo": float,
+                "key": str,
+                "mode": str,
+                "avg_velocity": float
+            }
         """
         midi = pretty_midi.PrettyMIDI(midi_path)
 
-        # more stable than relying only on estimate_tempo()
+        # Tempo handling:
+        # - if no tempo events exist, use estimate_tempo()
+        # - if the only tempo event is default 120 BPM, also use estimate_tempo()
+        # - otherwise use the median of the real tempo map
         tempo_times, tempi = midi.get_tempo_changes()
         if len(tempi) == 0:
+            tempo = float(midi.estimate_tempo())
+        elif len(tempi) == 1 and abs(float(tempi[0]) - 120.0) < 1e-6:
             tempo = float(midi.estimate_tempo())
         else:
             tempo = float(np.median(tempi))
@@ -78,11 +91,17 @@ class MIDIDataset(Dataset):
         else:
             chroma_sum = chroma.sum(axis=1)
 
-            major_template = np.array([6.35, 2.23, 3.48, 2.33, 4.38, 4.09,
-                                    2.52, 5.19, 2.39, 3.66, 2.29, 2.88])
-            minor_template = np.array([6.33, 2.68, 3.52, 5.38, 2.60, 3.53,
-                                    2.54, 4.75, 3.98, 2.69, 3.34, 3.17])
-            names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+            # Krumhansl-Schmuckler style key estimation templates
+            major_template = np.array([
+                6.35, 2.23, 3.48, 2.33, 4.38, 4.09,
+                2.52, 5.19, 2.39, 3.66, 2.29, 2.88
+            ])
+            minor_template = np.array([
+                6.33, 2.68, 3.52, 5.38, 2.60, 3.53,
+                2.54, 4.75, 3.98, 2.69, 3.34, 3.17
+            ])
+            names = ["C", "C#", "D", "D#", "E", "F",
+                     "F#", "G", "G#", "A", "A#", "B"]
 
             best_score = -1e9
             best_key = "C"
@@ -117,5 +136,5 @@ class MIDIDataset(Dataset):
             "tempo": tempo,
             "key": key_name,
             "mode": mode,
-            "avg_velocity": avg_velocity
+            "avg_velocity": avg_velocity,
         }
