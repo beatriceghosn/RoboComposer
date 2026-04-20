@@ -11,7 +11,7 @@ __pycache__/
 *.py[cod]
 
 # --- Machine Learning & Data ---
-data/raw/*
+data/maestro-v3.0.0/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
