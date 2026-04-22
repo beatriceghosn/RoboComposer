@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoboComposer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div class="logo">
+          <span class="logo-icon" aria-hidden="true">◆</span>
+          <h1>RoboComposer</h1>
+        </div>
+        <p class="tagline">Prompt → MIDI → robot keys</p>
+      </header>
+
+      <section class="panel prompt-panel">
+        <label for="prompt" class="label">What should we play?</label>
+        <textarea
+          id="prompt"
+          rows="4"
+          placeholder="e.g. A slow melancholic nocturne in D minor, Chopin-like…"
+        ></textarea>
+        <div class="row">
+          <button type="button" id="btn-generate" class="btn primary">
+            Generate MIDI
+          </button>
+          <span id="generate-status" class="status" role="status"></span>
+        </div>
+      </section>
+
+      <section class="panel upload-panel">
+        <label class="label">Or load a MIDI file</label>
+        <input type="file" id="midi-file" accept=".mid,.midi,audio/midi" />
+      </section>
+
+      <section class="stage">
+        <div class="stage-label">Keyboard</div>
+        <div class="keyboard-wrap" id="keyboard-wrap">
+          <div class="hands-layer" aria-hidden="true">
+            <div class="hand hand-left" id="hand-left">
+              <svg class="hand-svg" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="metalL" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7ee8ff" />
+                    <stop offset="100%" stop-color="#2a8a9e" />
+                  </linearGradient>
+                </defs>
+                <ellipse cx="60" cy="22" rx="18" ry="14" fill="url(#metalL)" stroke="#0a3d45" stroke-width="2" />
+                <path
+                  d="M60 36 L45 58 L38 78 L52 82 L60 62 L68 82 L82 78 L75 58 Z"
+                  fill="#5ad4e8"
+                  stroke="#0a3d45"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <rect x="48" y="70" width="24" height="10" rx="3" fill="#1a5c68" stroke="#0a3d45" stroke-width="1.5" />
+              </svg>
+            </div>
+            <div class="hand hand-right" id="hand-right">
+              <svg class="hand-svg" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="metalR" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#c4a7ff" />
+                    <stop offset="100%" stop-color="#5c3d9e" />
+                  </linearGradient>
+                </defs>
+                <ellipse cx="60" cy="22" rx="18" ry="14" fill="url(#metalR)" stroke="#2d1a4a" stroke-width="2" />
+                <path
+                  d="M60 36 L45 58 L38 78 L52 82 L60 62 L68 82 L82 78 L75 58 Z"
+                  fill="#a78fff"
+                  stroke="#2d1a4a"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <rect x="48" y="70" width="24" height="10" rx="3" fill="#4a3570" stroke="#2d1a4a" stroke-width="1.5" />
+              </svg>
+            </div>
+          </div>
+          <div class="keyboard" id="keyboard"></div>
+        </div>
+        <div class="transport">
+          <button type="button" id="btn-play" class="btn" disabled>Play</button>
+          <button type="button" id="btn-stop" class="btn ghost" disabled>Stop</button>
+          <button type="button" id="btn-save-midi" class="btn" disabled>Save MIDI</button>
+          <span id="playback-status" class="status"></span>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
