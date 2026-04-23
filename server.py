@@ -1,5 +1,6 @@
 from io import BytesIO
 from pathlib import Path
+import traceback
 
 from flask import Flask, jsonify, request, send_file, send_from_directory
 

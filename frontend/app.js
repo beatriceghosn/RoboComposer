@@ -144,6 +144,8 @@ function stopPlayback() {
     activeSynth = null;
   }
 
+  Tone.Draw.cancel(0);
+
   keyElements.forEach((k) => k.classList.remove("active"));
   el.handLeft.classList.remove("press");
   el.handRight.classList.remove("press");
