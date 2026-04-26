@@ -37,14 +37,15 @@ RoboComposer is an interactive, AI-driven music generation platform that transla
 ```
 RoboComposer/
 ├── data/
-│   └── ...
+│   └── maestro-v3.0.0
+│   └── processed
 ├── frontend/
 │   ├── .gitkeep
 │   ├── app.js
 │   ├── index.html
 │   └── styles.css
 ├── notebooks/
-│   └── ...
+│   └── exploration.ipynb
 ├── outputs/
 │   ├── full_pipeline_output.mid
 │   ├── test_dramatic.mid
