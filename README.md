@@ -2,7 +2,7 @@
 
 ### What it Does
 
-RoboComposer is an interactive, AI-driven music generation platform that translates natural language prompts into piano compositions. The system uses a **Retrieval-Augmented Generation (RAG)** pipeline to search the MAESTRO dataset for MIDI snippets that match the user's desired "vibe." A Google Gemini orchestrator then structures these snippets into a cohesive piece, which is visualized in real-time on a 3D piano interface with synchronized "robot hands."
+RoboComposer is an interactive, AI-driven music generation platform that translates natural language prompts into piano compositions. The system uses a **Retrieval-Augmented Generation (RAG)** pipeline to search the MAESTRO dataset for MIDI snippets that match the user's desired mood, tone, key, etc. A Google Gemini orchestrator then structures these snippets into a cohesive piece, which is visualized in real-time on a piano interface with synchronized "robot hands."
 
 ### Quick Start
 
