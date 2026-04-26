@@ -17,8 +17,6 @@ RoboComposer is an interactive, AI-driven music generation platform that transla
 - [Demo Video](INSERT_LINK_HERE)
 - [Technical Walkthrough](INSERT_LINK_HERE)
 
-### Evaluation
-
 ### Individual Contributions
 
 **Beatrice Ghosn:** 
