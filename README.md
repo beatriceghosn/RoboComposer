@@ -27,7 +27,7 @@ RoboComposer is an interactive, AI-driven music generation platform that transla
 
 **Angela Predolac:**
 
-- RAG Pipeline: Engineered the rag_retriever.py and vector_store.py modules, implementing FAISS for high-performance semantic search.
+- RAG Pipeline: Engineered the rag_retriever.py modules, implementing FAISS for high-performance semantic search.
 - Music Generation: Developed music_generator.py to handle the reconstruction of MIDI files from retrieved motifs and LLM instructions.
 - Search Logic: Implemented the core retrieval algorithms to ensure musical coherence between user prompts and retrieved snippets.
 
