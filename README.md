@@ -22,7 +22,7 @@ RoboComposer is an interactive, AI-driven music generation platform that transla
 **Beatrice Ghosn:** 
 
 - Core Logic & Infrastructure: Developed and tested the midi_dataset.py and tokenizer.py modules for MIDI-to-vector processing.
-- Dataset Exploration: EDA on the MAESTRO dataset, exploring size, schema, composer distribution, year distribution, etc.
+- Dataset Exploration: EDA on the MAESTRO dataset, exploring size, schema, composer distribution, year distribution, etc. to better understand the data.
 - LLM Integration: Architected the llm_orchestrator.py to handle prompt-to-JSON mapping and structured AI responses.
 - System Integration: Developed the Flask API backend and the interactive frontend UI, ensuring seamless communication between the Python logic and the Tone.js audio engine.
 
