@@ -8,9 +8,10 @@ AI tools were used in the following ways:
 
 ### 1. Code Assistance and Debugging
 ChatGPT was used to:
-- Help debug Python errors (e.g., invalid MIDI note timings, environment issues, import errors)
+- Debug Python errors such as invalid MIDI note timings, dataset parsing issues, and import errors in midi_dataset.py and tokenizer.py
 - Suggest fixes for runtime errors in `music_generator.py` and `rag_retriever.py`
-- Provide guidance on structuring Flask backend routes and connecting the frontend to the backend
+- Provide guidance on structuring and debugging Flask backend routes, including request handling and API responses
+- Assist in connecting the frontend UI with backend endpoints, including handling JSON payloads and response formats
 - Assist in resolving issues with local development setup (e.g., `.env`, Python environments, package installation)
 
 All suggested code was reviewed, tested, and modified as needed before being integrated into the project.
@@ -21,6 +22,7 @@ ChatGPT was used to:
   - `RAGRetriever` (FAISS-based retrieval system)
   - `MusicGenerator` (baseline MIDI generation logic)
   - `LLMOrchestrator` (prompt-to-JSON constraint parsing)
+  -  `midi_dataset.py` and `tokenizer.py` (MIDI preprocessing and tokenization)
 - Provide examples of how to structure a multi-stage pipeline (LLM → RAG → generation)
 - Help design integration logic between modules
 
